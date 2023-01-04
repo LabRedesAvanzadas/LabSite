@@ -1,0 +1,117 @@
+<!--<nav class="navbar">-->
+<!--  <div>-->
+<!--    <a-->
+<!--      [routerLink]="['/home']"-->
+<!--      placement="bottom"-->
+<!--      tooltip="Designed by CC"-->
+<!--    >-->
+<!--      <img src="./assets/img/LRA_logo_white.png" height="50">-->
+<!--    </a>-->
+<!--    <div>-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li class="nav-item p-0">-->
+<!--          <a-->
+<!--            class="nav-link"-->
+<!--            href="https://github.com/LabRedesAvanzadas?tab=repositories"-->
+<!--            placement="bottom"-->
+<!--            target="_blank"-->
+<!--            tooltip="Github"-->
+<!--          >-->
+<!--            <i class="fab fa-github"> </i>-->
+<!--            <p class="d-lg-none d-xl-none">Github</p>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item p-0">-->
+<!--          <a-->
+<!--            class="nav-link"-->
+<!--            href="https://www.instagram.com/LabAvanzadas"-->
+<!--            placement="bottom"-->
+<!--            target="_blank"-->
+<!--            tooltip="Síguenos en IG"-->
+<!--          >-->
+<!--            <i class="fab fa-instagram"> </i>-->
+<!--            <p class="d-lg-none d-xl-none">Instagram</p>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" [routerLink]="['/home']"> Contacto </a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a-->
+<!--            class="nav-link"-->
+<!--            href="http://blog.espol.edu.ec/telematica/">-->
+<!--            Blog-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<!--<header>-->
+<!--  <div class="inner-width">-->
+<!--    <img src="./assets/img/LRA_logo_white.png" height="50">-->
+<!--    <i class="menu-toggle-btn fas fa-bars"></i>-->
+<!--    <ul class="navbar-nav">-->
+<!--      <li class="nav-item p-0">-->
+<!--        <a-->
+<!--          class="nav-link"-->
+<!--          href="https://github.com/LabRedesAvanzadas?tab=repositories"-->
+<!--          placement="bottom"-->
+<!--          target="_blank"-->
+<!--          tooltip="Github"-->
+<!--        >-->
+<!--          <i class="fab fa-github"> </i>-->
+<!--          <p class="d-lg-none d-xl-none">Github</p>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li class="nav-item p-0">-->
+<!--        <a-->
+<!--          class="nav-link"-->
+<!--          href="https://www.instagram.com/LabAvanzadas"-->
+<!--          placement="bottom"-->
+<!--          target="_blank"-->
+<!--          tooltip="Síguenos en IG"-->
+<!--        >-->
+<!--          <i class="fab fa-instagram"> </i>-->
+<!--          <p class="d-lg-none d-xl-none">Instagram</p>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" [routerLink]="['/home']"> Contacto </a>-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a-->
+<!--          class="nav-link"-->
+<!--          href="http://blog.espol.edu.ec/telematica/">-->
+<!--          Blog-->
+<!--        </a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</header>-->
+<!--<script src="/assets/js/navbar.js"></script>-->
+
+
+<mat-toolbar fxLayout="row" color="primary">
+  <span fxFlex>Responsive Toolbar Demo</span>
+  <button mat-button *ngFor="let item of menuItems" fxHide.xs>
+    <mat-icon class="mr">{{item.icon}}</mat-icon>
+    {{item.label}}
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #dropMenu="matMenu">
+    <ng-container *ngFor="let item of menuItems">
+      <button mat-menu-item>
+        <mat-icon class="mr">{{item.icon}}</mat-icon>
+        {{item.label}}
+      </button>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-menu>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
