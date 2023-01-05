@@ -17,6 +17,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import { DevicesComponent } from "./devices/devices.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,10 @@ import { DevicesComponent } from "./devices/devices.component";
         MatMenuModule,
         MatButtonModule,
         MatIconModule,
-        MatDividerModule
+        MatDividerModule,
+        HttpClientModule,
+        AppRoutingModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]
