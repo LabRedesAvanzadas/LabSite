@@ -1,26 +1,71 @@
+.ml11
+  font-weight: 700
+  font-size: 3.5em
+
+
+.ml11 .text-wrapper
+  position: relative
+  display: inline-block
+  padding-top: 0.1em
+  padding-right: 0.05em
+  padding-bottom: 0.15em
+
+
+.ml11 .line
+  opacity: 0
+  position: absolute
+  left: 0
+  height: 100%
+  width: 3px
+  background-color: #fff
+  transform-origin: 0 50%
+
+
+.ml11 .line1
+  top: 0
+  left: 0
+
+
+.ml11 .letter
+  line-height: 1em
+  font-family: Lora, serif
+  font-style: italic
+  font-weight: 400
+  font-size: 2.7em
+  display: inline-block
+  position: relative
+  mix-blend-mode: overlay
+
 .background
   display: flex
   flex-flow: column
   justify-items: center
-  padding: 100px
+  background-color: #000022
+  height: 100%
 .title
   display: flex
   flex-flow: column
   color: white
+  margin-top: 50px
 .message
   display: flex
   align-self: center
   padding-bottom: 20px
+  flex-flow: column
 .body
   display: flex
   flex-flow: row
-  justify-content: space-between
+  align-items: center
+  padding-left: 50px
+  padding-right: 50px
+  justify-content: space-evenly
+  overflow: hidden
+
 .options
   display: flex
   flex-flow: column
   justify-content: space-between
   z-index: 100
-  height: 500px
 
 
 *
@@ -32,11 +77,6 @@
   display: flex
   width: 600px
   height: 400px
-body
-  display: flex
-  justify-content: center
-  align-items: center
-  min-height: 100vh
 .picsum-img-wrapper
   display: flex
   width: 600px
@@ -49,6 +89,8 @@ body
   display: flex
   align-items: center
   transition: 0.5s
+  margin-top: 25px
+  margin-bottom: 25px
 
 .card .circle
   position: absolute
@@ -79,7 +121,7 @@ body
   top: 50%
   left: 50%
   transform: translate(-50%,-50%)
-  height: 100%
+  height: 130%
   pointer-events: none
   transition: 0.5s
 
