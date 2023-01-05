@@ -5,11 +5,14 @@ import {TemperatureComponent} from "./temperature/temperature.component";
 import {MaskDetectorComponent} from "./mask-detector/mask-detector.component";
 import {CommonModule} from "@angular/common";
 import {BrowserModule} from "@angular/platform-browser";
+import { DevicesComponent } from "./devices/devices.component";
+
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   {path: "mask", component: MaskDetectorComponent },
-  {path: "sensor", component: TemperatureComponent }
+  {path: "sensor", component: TemperatureComponent },
+  {path: "devices", component: DevicesComponent}
 
 ];
 
