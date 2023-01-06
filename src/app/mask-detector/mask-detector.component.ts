@@ -1,10 +1,45 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
+declare var anime: any;
 
 @Component({
   selector: 'app-mask-detector',
   templateUrl: './mask-detector.component.html',
   styleUrls: ['./mask-detector.component.sass']
 })
-export class MaskDetectorComponent {
+export class MaskDetectorComponent implements AfterViewInit{
+
+  ngAfterViewInit(): void {
+    var textWrapper = document.querySelector('.ml11 .letters');
+    textWrapper!.innerHTML = textWrapper!.textContent!.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+      .add({
+        targets: '.ml11 .line',
+        scaleY: [0,1],
+        opacity: [0.5,1],
+        easing: "easeOutExpo",
+        duration: 700
+      })
+      .add({
+        targets: '.ml11 .line',
+        translateX: [0, document!.querySelector('.ml11 .letters')!.getBoundingClientRect().width + 10],
+        easing: "easeOutExpo",
+        duration: 700,
+        delay: 100
+      }).add({
+      targets: '.ml11 .letter',
+      opacity: [0,1],
+      easing: "easeOutExpo",
+      duration: 600,
+      offset: '-=775',
+      delay: (el:any, i:any) => 34 * (i+1)
+    }).add({
+      targets: '.ml11',
+      opacity: 0,
+      duration: 1000,
+      easing: "easeOutExpo",
+      delay: 10000000000
+    });
+  }
 
 }

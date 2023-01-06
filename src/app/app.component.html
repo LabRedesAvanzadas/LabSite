@@ -94,7 +94,9 @@
 
 
 <mat-toolbar fxLayout="row">
-  <span><img src="./assets/img/LRA_logo_white.png" height="60"></span>
+  <span style="z-index: 2;">
+    <a [routerLink]="['/home']">
+    <img src="./assets/img/LRA_logo_white.png" height="60"></a></span>
   <button mat-button *ngFor="let item of menuItems" fxHide.xs>
     <mat-icon class="mr">{{item.icon}}</mat-icon>
     {{item.label}}

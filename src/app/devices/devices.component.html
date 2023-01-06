@@ -1,26 +1,29 @@
 <div class="background">
-  <div class="computers">
-    <h1 style="margin-bottom: 15px">Workstations</h1>
-    <div *ngIf="workstations.length > 0 " class="panel">
-      <div class="entity" *ngFor="let n of workstations | keyvalue">
-        <img class="pcs" src="assets/img/monitor.png" height="50px" width="50px"/>
-        <span data-background-color="white" >{{n.value}}</span>
+  <div class="devices-content">
+    <div class="computers">
+      <h1 style="margin-bottom: 15px">Workstations</h1>
+      <div *ngIf="workstations.length > 0 " class="panel">
+        <div class="entity" *ngFor="let n of workstations | keyvalue">
+          <img class="pcs" src="assets/img/monitor.png" height="50px" width="50px"/>
+          <span data-background-color="white" >{{n.value}}</span>
+        </div>
+      </div>
+      <div *ngIf="workstations.length == 0 " class="panel">
+        <div class="entity justify-content-center">
+          <span data-background-color="white" >No existen dispositivos conectados</span>
+        </div>
       </div>
     </div>
-    <div *ngIf="workstations.length == 0 " class="panel">
-      <div class="entity justify-content-center">
-        <span data-background-color="white" >No existen dispositivos conectados</span>
+    <div class="servers">
+      <h1 style="margin-bottom: 15px">Servidores</h1>
+      <div  class="panel">
+        <div class="entity" *ngFor="let n of servers | keyvalue">
+          <img class="pcs" src="assets/img/server.png" height="50px" width="50px"/>
+          <span data-background-color="white" >{{n.value}}</span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="servers">
-    <h1 style="margin-bottom: 15px">Servidores</h1>
-    <div  class="panel">
-      <div class="entity" *ngFor="let n of servers | keyvalue">
-        <img class="pcs" src="assets/img/server.png" height="50px" width="50px"/>
-        <span data-background-color="white" >{{n.value}}</span>
-      </div>
-    </div>
-  </div>
+
 
 </div>
