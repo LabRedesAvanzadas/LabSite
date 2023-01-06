@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiConectionService} from "../services/api-conection.service"
-//import dirs from "/src/assets/";
+import dirs from "../../assets/ipv4_dirs.json";
 import * as _ from "lodash";
 @Component({
   selector: 'app-devices',
@@ -9,31 +9,6 @@ import * as _ from "lodash";
 })
 export class DevicesComponent implements OnInit{
   isCollapsed = true;
-  dirs= {
-    "servers": [
-      "200.126.14.227",
-      "200.126.14.228",
-      "200.126.14.229",
-      "200.126.14.230",
-      "200.126.14.231",
-      "200.126.14.232",
-      "200.126.14.233",
-      "200.126.14.234",
-      "200.126.14.235"
-    ],
-    "workstations": [
-      "200.126.14.238",
-      "200.126.14.239",
-      "200.126.14.240",
-      "200.126.14.241",
-      "200.126.14.242",
-      "200.126.14.243",
-      "200.126.14.244",
-      "200.126.14.245",
-      "200.126.14.246",
-      "200.126.14.247"
-    ]
-  }
   data = { _id: []};
   servers : any[] = [];
   workstations : any [] = [];
@@ -56,9 +31,9 @@ export class DevicesComponent implements OnInit{
     const _tempServers: any[] =  [];
     _.values(data).forEach(ip  => {
       console.log(ip)
-      if (this.dirs.workstations.includes(ip)){
+      if (dirs.workstations.includes(ip)){
         _tempWorkstations.push(ip);
-      } else if (this.dirs.servers.includes(ip)){
+      } else if (dirs.servers.includes(ip)){
         _tempServers.push(ip)
       }
     })
