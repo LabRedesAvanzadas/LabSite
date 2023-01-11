@@ -1,7 +1,13 @@
 .ml11
   font-weight: 700
   font-size: 3.5em
+  @media screen and (max-device-width: 640px)
+    font-size: 2.0em
 
+.ml16
+  @media screen and (max-device-width: 640px)
+    font-size: 1.2em
+    line-height: 1.5em
 
 .ml11 .text-wrapper
   position: relative
@@ -52,6 +58,11 @@
   align-self: center
   padding-bottom: 20px
   flex-flow: column
+  @media screen and (max-device-width: 640px)
+    padding-right: 20px
+    padding-left: 20px
+    text-align: justify
+    padding-bottom: 0
 .body
   display: flex
   flex-flow: row
@@ -60,12 +71,22 @@
   padding-right: 50px
   justify-content: space-evenly
   overflow: hidden
+  @media screen and (max-device-width: 640px)
+    flex-flow: column
+    overflow-y: auto
+    z-index: 5
+    padding-top: 230px
+
 
 .options
   display: flex
   flex-flow: column
   justify-content: space-between
-  z-index: 100
+  z-index: 3
+  @media screen and (max-device-width: 640px)
+    padding-top: 30px
+    padding-bottom: 80px
+
 
 
 *
@@ -77,10 +98,17 @@
   display: flex
   width: 600px
   height: 400px
+  @media screen and (max-device-width: 640px)
+    display: contents
+    width: 100vw
+    height: auto
 .picsum-img-wrapper
   display: flex
   width: 600px
   height: 400px
+  @media screen and (max-device-width: 640px)
+    height: 200px
+    width: 90vw
 .card
   position: relative
   width: 300px
@@ -176,3 +204,7 @@ card .content h2
   font-weight: 700
   transition: 0.5s
 
+.img
+  @media screen and (max-device-width: 640px)
+    height: 100%
+    width: 100%
