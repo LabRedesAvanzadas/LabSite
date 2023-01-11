@@ -109,6 +109,12 @@ export class TemperatureComponent implements  OnInit{
 
     });
   }
+  getRangeTemperature( ini : string, fin: string ){
+    this.api.getQuery("getSensor?init_date=".concat(ini).concat("&end_date="+fin)).subscribe((response : any) => {
+      this.datat = response
+      console.log(this.datat)
+    });
+  }
 
 
 }
