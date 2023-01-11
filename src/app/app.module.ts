@@ -18,6 +18,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import { DevicesComponent } from "./devices/devices.component";
 import {HttpClientModule} from "@angular/common/http";
+import {NgxEchartsModule} from "ngx-echarts";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,9 @@ import {HttpClientModule} from "@angular/common/http";
         MatDividerModule,
         HttpClientModule,
         AppRoutingModule,
+        NgxEchartsModule.forRoot({
+          echarts: () => import('echarts')
+        })
 
     ],
   providers: [],
