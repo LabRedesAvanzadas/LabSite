@@ -4,11 +4,6 @@
   @media screen and (max-device-width: 640px)
     font-size: 2.0em
 
-.ml16
-  @media screen and (max-device-width: 640px)
-    font-size: 1.2em
-    line-height: 1.5em
-
 .ml11 .text-wrapper
   position: relative
   display: inline-block
@@ -41,6 +36,19 @@
   display: inline-block
   position: relative
   mix-blend-mode: overlay
+
+.ml16
+  color: #ffffff
+  font-weight: 500
+  font-size: 2em
+  overflow: hidden
+  @media screen and (max-device-width: 640px)
+    font-size: 1.2em
+    line-height: 1.5em
+.ml16 .letter
+  display: inline-block
+  line-height: 1em
+
 
 .background
   display: flex
@@ -98,6 +106,7 @@
   display: flex
   width: 600px
   height: 400px
+  z-index: 3
   @media screen and (max-device-width: 640px)
     display: contents
     width: 100vw

@@ -41,6 +41,26 @@ export class HomeComponent implements AfterViewInit{
       easing: "easeOutExpo",
       delay: 10000000000
     });
+
+    var textWrapper2 = document.querySelector('.ml16');
+    textWrapper2!.innerHTML = textWrapper2!.textContent!.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+      .add({
+        targets: '.ml16 .letter',
+        opacity: [0.05,1],
+        easing: "easeOutExpo",
+        duration: 800,
+        offset: '-=775',
+        delay: (el:any, i:any) => 50 * i
+      }).add({
+      targets: '.ml11',
+      opacity: 0,
+      duration: 1000,
+      easing: "easeOutExpo",
+      delay: 10000000000
+    });
+
   }
 
 
