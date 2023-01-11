@@ -119,6 +119,7 @@
   transition: 0.5s
   margin-top: 25px
   margin-bottom: 25px
+  background-color: #3f2f5b
 
 .card .circle
   position: absolute
@@ -141,7 +142,7 @@
   transition: 0.5s
 
 .card:hover .circle::before
-  background: #0065c3
+  background: rgba(0, 101, 195, 0)
   clip-path: circle(50px at center)
 
 .card img
@@ -162,7 +163,7 @@
   width: 100%
   height: 80%
   left: 100%
-  padding: 20px 20px 20px 40px
+  padding: 10px 10px 10px 30px
   transition: 0.5s
   opacity: 0
   visibility: hidden
@@ -172,14 +173,14 @@
   left: 0
   opacity: 1
   visibility: visible
+  color: whitesmoke
 
 
-card .content h2
+.card .content h2
   color: #fff
-  text-transform: uppercase
-  font-size: 2em
+  font-size: 1.5em
   line-height: 1em
-  margin-bottom: 5px
+  margin-bottom: 0px
 
 .card .content h3
   color: #fff
@@ -203,8 +204,4 @@ card .content h2
   text-decoration: none
   font-weight: 700
   transition: 0.5s
-
-.img
-  @media screen and (max-device-width: 640px)
-    height: 100%
-    width: 100%
+  line-height: 1em
