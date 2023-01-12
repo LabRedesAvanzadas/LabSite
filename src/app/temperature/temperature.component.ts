@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiConectionService} from "../services/api-conection.service"
+import {FormControl, FormGroup} from "@angular/forms";
 import moment from "moment";
 
 @Component({
@@ -7,29 +8,26 @@ import moment from "moment";
   templateUrl: './temperature.component.html',
   styleUrls: ['./temperature.component.sass']
 })
-export class TemperatureComponent implements  OnInit{
-  datat : any;
+export class TemperatureComponent implements  OnInit {
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(getLastPDay(new Date(),0)),
+    end: new FormControl<Date | null>(new Date()),
+  });
+
+  datat: any;
   options: any;
   updateOptions: any;
-
-  private oneDay = 24 * 3600 * 1000;
-  private now: any;
-  private value: any;
+  rangeTemperature: any = [];
   private data: any;
   private timer: any;
 
-  constructor(private api: ApiConectionService) { }
+  constructor(private api: ApiConectionService) {
+  }
 
   ngOnInit(): void {
     this.getLastTemperature();
-    this.data = [];
-    this.now = new Date(1997, 9, 3);
-    this.value = Math.random() * 1000;
-
-    for (let i = 0; i < 1000; i++) {
-      this.data.push(this.randomData());
-    }
-
+    this.data = this.getRangeTemperature('01/12/2023', '01/12/2023');
     // initialize chart options:
     this.options = {
       title: {
@@ -37,10 +35,8 @@ export class TemperatureComponent implements  OnInit{
       },
       tooltip: {
         trigger: 'axis',
-        formatter: (params:any) => {
-          params = params[0];
-          const date = new Date(params.name);
-          return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+        formatter: (params: any) => {
+          return this.datat.createAt
         },
         axisPointer: {
           animation: false
@@ -69,57 +65,60 @@ export class TemperatureComponent implements  OnInit{
         data: this.data
       }]
     };
-
-    // Mock dynamic data:
+    this.updateOptions = {
+      series: [{
+        data: this.rangeTemperature
+      }]
+    };
     this.timer = setInterval(() => {
-      for (let i = 0; i < 5; i++) {
-        this.data.shift();
-        this.data.push(this.randomData());
-      }
-
-      // update series data:
+      this.getLastTemperature();
+      this.rangeTemperature.push(parseFloat(this.datat.temperature));
       this.updateOptions = {
         series: [{
-          data: this.data
+          data: this.rangeTemperature
         }]
       };
-    }, 1000);
-    this.getRangeTemperature("01/12/2023","01/12/2023");
+    }, 180000);
+    //this.getRangeTemperature("01/12/2023","01/12/2023");
   }
 
   ngOnDestroy() {
     clearInterval(this.timer);
   }
 
-  randomData() {
-    this.now = new Date(this.now.getTime() + this.oneDay);
-    this.value = this.value + Math.random() * 21 - 10;
-    return {
-      name: this.now.toString(),
-      value: [
-        [this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join('/'),
-        Math.round(this.value)
-      ]
-    };
-  }
-
-
-  getLastTemperature(){
+  getLastTemperature() {
     this.api.getQuery('getlastSensed').subscribe((response: any) => {
-      this.datat=response
+      this.datat = response
       console.log(this.datat)
 
     });
   }
-  getRangeTemperature( ini : string, fin: string ){
+
+  getRangeTemperature(ini: string, fin: string) {
     let date_ini = moment(ini).format("DD/MM/YYYY")
     let date_fin = moment(fin).format("DD/MM/YYYY")
-    this.api.getQuery("getSensor?init_date=".concat(date_ini).concat("&end_date="+date_fin)).subscribe((response : any) => {
-      this.datat = response
-      console.log(date_fin, date_ini)
-      console.log(this.datat)
+    this.api.getQuery("getSensor?init_date=".concat(date_ini).concat("&end_date=" + date_fin)).subscribe((response: any) => {
+      Object.values(response).map(i => {
+        // @ts-ignore
+        this.rangeTemperature.push(parseFloat(i.temperature))
+      })
     });
   }
 
-
+  enviar() {
+    let y = moment(this.range.value.start)
+    let x = moment(this.range.value.end)
+    this.rangeTemperature = []
+    this.getRangeTemperature(y.format("MM/DD/YYYY").toString(),x.format("MM/DD/YYYY").toString())
+    this.updateOptions = {
+      series: [{
+        data: this.rangeTemperature
+      }]
+    };
+  }
+}
+function getLastPDay(date = new Date(), i : number) {
+  const previous = new Date(date.getTime());
+  previous.setDate(date.getDate() - i);
+  return previous;
 }

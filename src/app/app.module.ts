@@ -19,6 +19,11 @@ import {MatIconModule} from "@angular/material/icon";
 import { DevicesComponent } from "./devices/devices.component";
 import {HttpClientModule} from "@angular/common/http";
 import {NgxEchartsModule} from "ngx-echarts";
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatTableModule} from "@angular/material/table";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,28 +33,34 @@ import {NgxEchartsModule} from "ngx-echarts";
     MaskDetectorComponent,
     DevicesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        RouterOutlet,
-        NgbModule,
-        RouterLink,
-        FontAwesomeModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        FlexLayoutModule,
-        MatMenuModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDividerModule,
-        HttpClientModule,
-        AppRoutingModule,
-        NgxEchartsModule.forRoot({
-          echarts: () => import('echarts')
-        })
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterOutlet,
+    NgbModule,
+    RouterLink,
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    ReactiveFormsModule
 
-    ],
-  providers: [],
+  ],
+  exports: [MatTableModule],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

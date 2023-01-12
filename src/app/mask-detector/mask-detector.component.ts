@@ -7,8 +7,9 @@ declare var anime: any;
   styleUrls: ['./mask-detector.component.sass']
 })
 export class MaskDetectorComponent implements AfterViewInit{
-
+  streamUrl: any;
   ngAfterViewInit(): void {
+    this.streamUrl= 'http://200.126.12.8:2204/video_feed'
     var textWrapper = document.querySelector('.ml21 .letters');
     textWrapper!.innerHTML = textWrapper!.textContent!.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
 
@@ -41,5 +42,7 @@ export class MaskDetectorComponent implements AfterViewInit{
       delay: 10000000000
     });
   }
-
+  errorWithStream(){
+    this.streamUrl = '/assets/img/monitor.png'
+  }
 }

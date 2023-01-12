@@ -5,5 +5,5 @@
     <span class="letters">Detector de mascarilla</span>
   </span>
   </h2>
-  <img class="video" src="http://200.126.12.8:2204/video_feed">
+  <img class="video" [src]="streamUrl" (error)="errorWithStream()" >
 </div>
