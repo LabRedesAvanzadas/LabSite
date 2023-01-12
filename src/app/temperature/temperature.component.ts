@@ -1,19 +1,55 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ApiConectionService} from "../services/api-conection.service"
 import {FormControl, FormGroup} from "@angular/forms";
 import moment from "moment";
+declare var anime: any;
 
 @Component({
   selector: 'app-temperature',
   templateUrl: './temperature.component.html',
   styleUrls: ['./temperature.component.sass']
 })
-export class TemperatureComponent implements  OnInit {
+export class TemperatureComponent implements  OnInit, AfterViewInit {
 
   range = new FormGroup({
     start: new FormControl<Date | null>(getLastPDay(new Date(),0)),
     end: new FormControl<Date | null>(new Date()),
   });
+
+  ngAfterViewInit(): void {
+    var textWrapper = document.querySelector('.ml21 .letters');
+    textWrapper!.innerHTML = textWrapper!.textContent!.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+      .add({
+        targets: '.ml21 .line',
+        scaleY: [0,1],
+        opacity: [0.5,1],
+        easing: "easeOutExpo",
+        duration: 700
+      })
+      .add({
+        targets: '.ml21 .line',
+        translateX: [0, document!.querySelector('.ml21 .letters')!.getBoundingClientRect().width + 10],
+        easing: "easeOutExpo",
+        duration: 700,
+        delay: 100
+      }).add({
+      targets: '.ml21 .letter',
+      opacity: [0,1],
+      easing: "easeOutExpo",
+      duration: 600,
+      offset: '-=775',
+      delay: (el:any, i:any) => 34 * (i+1)
+    }).add({
+      targets: '.ml21',
+      opacity: 0,
+      duration: 1000,
+      easing: "easeOutExpo",
+      delay: 10000000000
+    });
+  }
+
 
   datat: any;
   options: any;
