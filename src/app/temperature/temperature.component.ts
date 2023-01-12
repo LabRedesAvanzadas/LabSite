@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiConectionService} from "../services/api-conection.service"
+import moment from "moment";
 
 @Component({
   selector: 'app-temperature',
@@ -83,6 +84,7 @@ export class TemperatureComponent implements  OnInit{
         }]
       };
     }, 1000);
+    this.getRangeTemperature("01/12/2023","01/12/2023");
   }
 
   ngOnDestroy() {
@@ -110,8 +112,11 @@ export class TemperatureComponent implements  OnInit{
     });
   }
   getRangeTemperature( ini : string, fin: string ){
-    this.api.getQuery("getSensor?init_date=".concat(ini).concat("&end_date="+fin)).subscribe((response : any) => {
+    let date_ini = moment(ini).format("DD/MM/YYYY")
+    let date_fin = moment(fin).format("DD/MM/YYYY")
+    this.api.getQuery("getSensor?init_date=".concat(date_ini).concat("&end_date="+date_fin)).subscribe((response : any) => {
       this.datat = response
+      console.log(date_fin, date_ini)
       console.log(this.datat)
     });
   }
