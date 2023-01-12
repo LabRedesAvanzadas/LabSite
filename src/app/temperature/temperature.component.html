@@ -1,22 +1,33 @@
 <div class="background">
-  <div class="calendar-widget">
-    <div class="calendario">
-      <mat-form-field appearance="fill">
-        <mat-label>Rango de Consulta</mat-label>
-        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Start date">
-          <input matEndDate formControlName="end" placeholder="End date">
-        </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-      </mat-form-field>
+  <div class="header">
+    <div class="message">
+      <h2 class="ml21">
+        <span class="text-wrapper">
+        <span class="line line1"></span>
+        <span class="letters">Historial de Temperatura</span>
+        </span>
+      </h2>
     </div>
-    <div class="boton">
-      <button  type="submit" class="btn btn-primary mb-2" (click)="enviar()">Buscar</button>
+    <div class="calendar-widget">
+      <div class="calendario">
+        <mat-form-field appearance="fill">
+          <mat-label>Rango de Consulta</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start date">
+            <input matEndDate formControlName="end" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="boton">
+        <button  type="submit" class="btn btn-primary mb-2" (click)="enviar()">Buscar</button>
+      </div>
     </div>
   </div>
+
 
   <div echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div>
 </div>

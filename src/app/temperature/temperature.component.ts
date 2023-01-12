@@ -19,6 +19,7 @@ export class TemperatureComponent implements  OnInit {
   options: any;
   updateOptions: any;
   rangeTemperature: any = [];
+  dateRecord : any = [];
   private data: any;
   private timer: any;
 
@@ -27,8 +28,7 @@ export class TemperatureComponent implements  OnInit {
 
   ngOnInit(): void {
     this.getLastTemperature();
-    this.data = this.getRangeTemperature('01/12/2023', '01/12/2023');
-    // initialize chart options:
+    this.getRangeTemperature('01/12/2023', '01/12/2023');
     this.options = {
       title: {
         text: 'Dynamic Data + Time Axis'
@@ -82,6 +82,7 @@ export class TemperatureComponent implements  OnInit {
     //this.getRangeTemperature("01/12/2023","01/12/2023");
   }
 
+
   ngOnDestroy() {
     clearInterval(this.timer);
   }
@@ -101,20 +102,21 @@ export class TemperatureComponent implements  OnInit {
       Object.values(response).map(i => {
         // @ts-ignore
         this.rangeTemperature.push(parseFloat(i.temperature))
+        // @ts-ignore
+        this.dateRecord.push(i.createAt)
       })
     });
+    console.log(this.rangeTemperature)
   }
 
   enviar() {
     let y = moment(this.range.value.start)
     let x = moment(this.range.value.end)
     this.rangeTemperature = []
+    this.dateRecord= []
+
     this.getRangeTemperature(y.format("MM/DD/YYYY").toString(),x.format("MM/DD/YYYY").toString())
-    this.updateOptions = {
-      series: [{
-        data: this.rangeTemperature
-      }]
-    };
+    this.updateOptions.series.data = this.rangeTemperature
   }
 }
 function getLastPDay(date = new Date(), i : number) {
