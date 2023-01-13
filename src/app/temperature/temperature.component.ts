@@ -63,16 +63,19 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getLastTemperature();
+    //this.getLastTemperature();
     this.getRangeTemperature('01/12/2023', '01/12/2023');
     this.options = {
       title: {
-        text: 'Dynamic Data + Time Axis'
+        text: ''
       },
       tooltip: {
         trigger: 'axis',
-        formatter: (params: any) => {
-          return this.dateRecord
+        formatter: (params:any) => {
+          params = params[0];
+          let date = new Date(params.value[0]);
+          return "Fecha: " + date.getDate() + '/' + (date.getMonth()+1) + ' ' + date.toLocaleTimeString() + '\n Temp: ' + params.value[1];
+          //return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
         },
         axisPointer: {
           animation: false
@@ -82,7 +85,7 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
         type: 'time',
         splitLine: {
           show: false
-        }
+        },
       },
       yAxis: {
         type: 'value',
@@ -101,20 +104,15 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
         data: this.dateRecord
       }]
     };
-    this.updateOptions = {
-      series: [{
-        data: this.rangeTemperature
-      }]
-    };
-    this.timer = setInterval(() => {
-      this.getLastTemperature();
-      this.rangeTemperature.push(parseFloat(this.datat.temperature));
-      this.updateOptions = {
-        series: [{
-          data: this.rangeTemperature
-        }]
-      };
-    }, 180000);
+    // this.timer = setInterval(() => {
+    //   this.getLastTemperature();
+    //   this.rangeTemperature.push(parseFloat(this.datat.temperature));
+    //   this.updateOptions = {
+    //     series: [{
+    //       data: this.rangeTemperature
+    //     }]
+    //   };
+    // }, 180000);
     //this.getRangeTemperature("01/12/2023","01/12/2023");
   }
 
@@ -134,29 +132,39 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
   getRangeTemperature(ini: string, fin: string) {
     let date_ini = moment(ini).format("DD/MM/YYYY")
     let date_fin = moment(fin).format("DD/MM/YYYY")
+    console.log(this.rangeTemperature)
+    let tempRange: number[] = [];
+    let tempDate: any[] = [];
+    let tempData: { value: any[]; }[] = [];
     this.api.getQuery("getSensor?init_date=".concat(date_ini).concat("&end_date=" + date_fin)).subscribe((response: any) => {
-      Object.values(response).map(i => {
-        // @ts-ignore
-        this.rangeTemperature.push(parseFloat(i.temperature))
-        // @ts-ignore
-        this.dateRecord.push(i.createAt)
+
+      Object.values(response).map((i:any) => {
+        console.log(i.createAt)
+        tempData.push( {
+          value : [moment.utc(i.createAt).toDate(), i.temperature]
+        });
       })
-    });
-    clearInterval(this.timer);
-    this.updateOptions = {
-      series: [{
-        data: this.rangeTemperature
-      }]
-    };
-    this.timer = setInterval(() => {
-      this.getLastTemperature();
-      this.rangeTemperature.push(parseFloat(this.datat.temperature));
+
+      this.rangeTemperature = tempRange;
+      this.dateRecord = tempDate;
       this.updateOptions = {
         series: [{
-          data: this.rangeTemperature
+          data: tempData
         }]
       };
-    }, 180000);
+
+    });
+    clearInterval(this.timer);
+
+    // this.timer = setInterval(() => {
+    //   this.getLastTemperature();
+    //   this.rangeTemperature.push(parseFloat(this.datat.temperature));
+    //   this.updateOptions = {
+    //     series: [{
+    //       data: this.rangeTemperature
+    //     }]
+    //   };
+    // }, 180000);
     console.log(this.rangeTemperature)
   }
 
