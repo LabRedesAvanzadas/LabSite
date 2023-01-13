@@ -72,7 +72,7 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
       tooltip: {
         trigger: 'axis',
         formatter: (params: any) => {
-          return this.datat.createAt
+          return this.dateRecord
         },
         axisPointer: {
           animation: false
@@ -98,7 +98,7 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
         emphasis: {
           line: false,
         },
-        data: this.data
+        data: this.dateRecord
       }]
     };
     this.updateOptions = {
@@ -142,6 +142,21 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
         this.dateRecord.push(i.createAt)
       })
     });
+    clearInterval(this.timer);
+    this.updateOptions = {
+      series: [{
+        data: this.rangeTemperature
+      }]
+    };
+    this.timer = setInterval(() => {
+      this.getLastTemperature();
+      this.rangeTemperature.push(parseFloat(this.datat.temperature));
+      this.updateOptions = {
+        series: [{
+          data: this.rangeTemperature
+        }]
+      };
+    }, 180000);
     console.log(this.rangeTemperature)
   }
 
@@ -150,9 +165,7 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
     let x = moment(this.range.value.end)
     this.rangeTemperature = []
     this.dateRecord= []
-
     this.getRangeTemperature(y.format("MM/DD/YYYY").toString(),x.format("MM/DD/YYYY").toString())
-    this.updateOptions.series.data = this.rangeTemperature
   }
 }
 function getLastPDay(date = new Date(), i : number) {
