@@ -11,24 +11,12 @@ export class AppComponent implements OnInit{
 
   menuItems = [
     {
-      label: 'Sign Up',
-      icon: 'login'
+      label: 'Github',
+      icon: 'github'
     },
     {
-      label: 'About',
-      icon: 'help'
-    },
-    {
-      label: 'Pricing',
-      icon: 'attach_money'
-    },
-    {
-      label: 'Docs',
-      icon: 'notes'
-    },
-    {
-      label: 'Showcase',
-      icon: 'slideshow'
+      label: 'Instagram',
+      icon: 'instagram'
     },
     {
       label: 'Blog',

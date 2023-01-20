@@ -64,7 +64,7 @@ export class TemperatureComponent implements  OnInit, AfterViewInit {
 
   ngOnInit(): void {
     //this.getLastTemperature();
-    this.getRangeTemperature('01/12/2023', '01/12/2023');
+    this.getRangeTemperature(moment().format("DD/MM/YYYY"), moment().format("DD/MM/YYYY"));
     this.options = {
       title: {
         text: ''
