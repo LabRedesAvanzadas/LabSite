@@ -7,7 +7,8 @@ declare var anime: any;
 })
 export class HomeComponent implements AfterViewInit{
 
-  images = ["./assets/img/LRA_photos_1.png", "./assets/img/LRA_photos_2.jpg", "./assets/img/LRA_photos_3.jpg","./assets/img/LRA_photos_4.jpg"];
+  images = ["./assets/img/LRA_photos_1.png", "./assets/img/LRA_photos_2.jpg", "./assets/img/LRA_photos_3.jpg",
+    "./assets/img/LRA_photos_4.jpg" , "./assets/img/LRD_1.jpeg", "./assets/img/LRD_2.jpeg",];
 
   ngAfterViewInit(): void {
     var textWrapper = document.querySelector('.ml11 .letters');
